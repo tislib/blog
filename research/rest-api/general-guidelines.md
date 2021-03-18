@@ -5,7 +5,7 @@ ________
 
 * [Main idea](#main-idea)
 * [Best Practices](#best-practices)
-* [Example cases](#example cases)
+* [Example cases](#example-cases)
 
 ## Main idea
 
@@ -112,5 +112,5 @@ DELETE /users/15/followings/17   <- user 15 unfollows user 17
 
 **Conclusion:**
 
-Translate actions to resources, e.g. do follow = create following, unfollow = remove following
+Translate actions to resources, e.g. do follow = POST following, unfollow = DELETE following
 
