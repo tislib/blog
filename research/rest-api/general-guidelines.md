@@ -114,3 +114,9 @@ DELETE /users/15/followings/17   <- user 15 unfollows user 17
 
 Translate actions to resources, e.g. do follow = POST following, unfollow = DELETE following
 
+
+
+### Case 2
+**Problem:**
+
+We need to 
