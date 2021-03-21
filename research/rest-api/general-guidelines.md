@@ -1,5 +1,8 @@
-Rest API General Guidelines
-________
+---
+title: "Rest API General Guidelines"
+date: 2021-03-21T03:36:48+04:00
+draft: false
+---
 
 # Table of contents
 
@@ -86,7 +89,7 @@ When to use nested resource?
 
 ### Cache data to improve performance
 
-# Example Cases
+## Example Cases
 
 ### Case 1
 **Problem:**
