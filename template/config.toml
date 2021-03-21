@@ -48,3 +48,12 @@ noClasses = false
 enable = true
 custom = 'Personal Blog by <a href="https://talehibrahimli.com">Taleh Ibrahimli</a>'
 hugo = false
+
+# If you want to use Google Tag Manager(https://analytics.google.com/) for analytics, add this section
+[params.analytics]
+enable = true
+# Google Analytics
+[params.analytics.google]
+id = "GTM-5L2NRFH"
+gtag = true
+anonymizeIP = false
