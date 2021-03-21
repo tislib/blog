@@ -42,3 +42,9 @@ weight = 3
 [markup.highlight]
 # false is a necessary configuration
 noClasses = false
+
+
+[params.footer]
+enable = true
+custom = 'Personal Blog by <a href="https://talehibrahimli.com">Taleh Ibrahimli</a>'
+hugo = false
