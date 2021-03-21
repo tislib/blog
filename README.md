@@ -6,4 +6,4 @@ ________________
 
 * Research 
     * Rest Api
-        * [General Guidelines](research/rest-api/general-guidelines.md) 
+        * [General Guidelines](posts/rest-api/general-guidelines.md) 

@@ -15,8 +15,8 @@ version = "2.0.X"
 identifier = "posts"
 pre = ""
 post = ""
-name = "Research"
-url = "/research/"
+name = "Posts"
+url = "/posts/"
 title = ""
 weight = 1
 [[menu.main]]

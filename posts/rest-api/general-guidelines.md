@@ -1,14 +1,25 @@
 ---
 title: "Rest API General Guidelines"
-date: 2021-03-21T03:36:48+04:00
+date: 2021-03-21T00:00:00
+lastmod: 2021-03-21T00:00:00
+slug: rest-api-guidelines
 draft: false
+tags: ["rest-api", "guidelines"]
+categories: ["posts", "rest-api"]
+summary: "Rest Api General Guidelines is for understanding Best Practices of Rest Api Architecture"
 ---
 
 # Table of contents
 
 * [Main idea](#main-idea)
 * [Best Practices](#best-practices)
-* [Example cases](#example-cases)
+    * [Don't write as Restful, Think as Restful](#dont-write-as-restful-think-as-restful)
+    * [Use nouns instead of verbs in endpoint paths](#use-nouns-instead-of-verbs-in-endpoint-paths)
+    * [Name collections with plural nouns](#name-collections-with-plural-nouns)
+    * [Nesting resources for hierarchical objects](#nesting-resources-for-hierarchical-objects)
+    * [Handle errors gracefully and return standard error codes](#handle-errors-gracefully-and-return-standard-error-codes)
+    * [Allow filtering, sorting, and pagination](#allow-filtering-sorting-and-pagination)
+    * [Maintain Good Security Practices](#maintain-good-security-practices)
 
 ## Main idea
 
@@ -16,7 +27,7 @@ The main idea on Rest API is that, parties communicate by sharing their current 
 
 Legacy APIs
 
-![](assets/general-guidelines-1.png)
+![](/posts/rest-api/assets/general-guidelines-1.png)
 
 When you want to call backend or some application you call some action in server, so you cannot predict what the outcome
 will be, you need to ask from server what is its new state, what happened after your action
@@ -26,7 +37,7 @@ easily (userUpdateRequest, userUpdateResponse, userGetRequest, userGetResponse, 
 
 New APIs
 
-![](assets/general-guidelines-2.png)
+![](/posts/rest-api/assets/general-guidelines-2.png)
 
 The main idea in Rest API is you transfer your current state, so instead of calling some action on backend, frontend is
 sharing current state about user1 with backend, in other word, frontend is replacing user1 state in backend with its own
@@ -88,38 +99,3 @@ When to use nested resource?
 ### Maintain Good Security Practices
 
 ### Cache data to improve performance
-
-## Example Cases
-
-### Case 1
-**Problem:**
-
-You have users, and users can follow each other, you want to create API for getting users, following/unfollowing users, and getting list of followers and following users (like in instagram)
-
-**Solution:**
-```
-#User CRUD:
-GET /users  <- get list of users
-
-POST /users/15/followings    <- user 15 follows user 17 
-{
-    "user": {
-        "id": 17
-    }
-}
-
-GET /users/15/followings/17   <- check if use 15 follows 17
-
-DELETE /users/15/followings/17   <- user 15 unfollows user 17
-```
-
-**Conclusion:**
-
-Translate actions to resources, e.g. do follow = POST following, unfollow = DELETE following
-
-
-
-### Case 2
-**Problem:**
-
-We need to 
