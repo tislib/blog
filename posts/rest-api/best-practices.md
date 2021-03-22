@@ -84,7 +84,7 @@ POST /users/15/deactivate
 ```
 
 What instead we can do?\
-Solutions 1: *Converting actions to sub-resources*\
+*Solutions 1: Converting actions to sub-resources*\
 We can think as our user resource has a sub resource named activated (adverb form of active) and if we create this sub resource we say that we activate user, if we remove this sub resource we say that we deactivate user
 ```
 GET /users/15/activated    <- this will return 200 if user is activated, 404 if user not activated
@@ -98,7 +98,7 @@ DELETE /users/15/star  <- this will unstar the user
 ```
 Basically what we're trying to do is to make our actions look like Rest API, so translate actions to resources
 
-Solution 2: *Converting actions to fields *\
+*Solution 2: Converting actions to fields*\
 In this solution we think that activated and star are not sub resource, they are properties of our user
 ```
 GET /users/15 RESPONSE: {...activated: true}
