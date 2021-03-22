@@ -12,7 +12,7 @@ summary: "Rest Api General Best Practices, and their reasons why you should go w
 
 * API's abstraction should be different from its implementation, if you want to write better API don't try to represent
    your backend logic as is, instead think how API may be better to use by its clients, always think as How API consumer will use it
-* Try to be proactive, don't try to translate legacy API's OR SOAP style to simply to REST API, try to be proactive,
+* Try to be proactive, don't try to translate legacy API's OR SOAP style simply to REST API, try to be proactive,
    think that how this API should be easy to use, how can I make it like a CRUD
 * Everything is CRUD, Any resource can be Created, Read, Updated, Deleted, Anything else can be represented as Resource
 
@@ -70,6 +70,41 @@ When to use nested resource?
    anything in orders without knowing which user is it related
 2. If you want to do operation on resource without knowing or having its parent, in that case nested resources are not
    correct choice
+
+### Convert Actions to *Resources* or *Fields*
+
+Let's say we have user resource, and we want to enable/disable, we want to give star to this user
+
+Simple but not desired:
+```
+POST /users/15/add-star
+POST /users/15/remove-star
+POST /users/15/activate
+POST /users/15/deactivate
+```
+
+What instead we can do?\
+Solutions 1: *Converting actions to sub-resources*\
+We can think as our user resource has a sub resource named activated (adverb form of active) and if we create this sub resource we say that we activate user, if we remove this sub resource we say that we deactivate user
+```
+GET /users/15/activated    <- this will return 200 if user is activated, 404 if user not activated
+POST /users/15/activated   <- this will activate user
+DELETE /users/15/activated <- this will deactivate user
+```
+Say idea for starring
+```
+POST /users/15/star  <- this will star the user
+DELETE /users/15/star  <- this will unstar the user
+```
+Basically what we're trying to do is to make our actions look like Rest API, so translate actions to resources
+
+Solution 2: *Converting actions to fields *\
+In this solution we think that activated and star are not sub resource, they are properties of our user
+```
+GET /users/15 RESPONSE: {...activated: true}
+PATCH /users/15 REQUEST BODY: {activated: true}
+```
+
 
 [comment]: <> (### Handle errors gracefully and return standard error codes)
 
