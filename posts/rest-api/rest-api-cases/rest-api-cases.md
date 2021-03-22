@@ -69,3 +69,10 @@ PATCH /users/15 REQUEST BODY: {activated: true}
 
 **Conclusion:**
 We can hack resources to support actions but with Rest architecture compatible
+
+### Case 3 
+Get aggregated data from users resource, group by age and show count of users in per age
+
+### Case 3
+Create Task / Start Task (will be processed in background) / Stop Task / Get Task Status / Get Task Result (Simple Job/Task Scheduler)
+

@@ -19,19 +19,21 @@ toc:
 ### Concept
 
 #### Base things in Rest Api
-**Rest Api** is stands for *Representational State Transfer*. \
-In Rest Api we have 2 basic terminology:
-1. **Resource** - an object which has state
+**Rest Api** is stands for *Representational State Transfer*. 
+
+Basic things in Rest Api design
+1. **Resource** - an object which has identifier
 2. **Method**   - an operation which has identifies which kind of state transfer will happen
 3. **State**    - state is current representation of resource, it means that our resource can have different data in different time, and it is state of resource 
+
+In Rest Apis resources are *identifed by their urls*, so it means that *1 unique url = 1 unique resource*
 
 We have Server and Clients, we can transfer state of resource from server to client or vice versa.
 
 #### What does state transfer mean?
-Let's say we want to **create new user**. *How we can understand this basic operation from state transfer perspective?*
-Creating new user means that, our client has new state (new user), and our client needs to transfer its new state about user resource to server.\  
-So, we can say that creating new user is transfer new user state to server\
-We also can say that updating existing user is transferring new state of existing resource to server\
+Let's say we want to **create new user**. *How we can understand this basic operation from state transfer perspective?*\
+Creating new user means that, *our client has new state (new user)*, and our client needs to *transfer its new state about user resource to server*.  
+So, we can say that creating new user is transfer new user state to server
 
 After we transfer state of resource to server or vice versa, both party should have same state if an external factor does not cause any change
 
@@ -40,23 +42,22 @@ It means that if we updated a resource, and we called GET method to get same res
 ### Don't write as Restful, Think as Restful
 
 #### Restful service should be abstract, not representation of backend service layer as is.
-You need to think on restful service separately, don't try to implement Rest Api's just like converting service layer codes to APIs, instead think from API consumer perspective
+You need to think on restful service independently, don't try to implement Rest Api's just like converting service layer codes to APIs, instead think from API consumer perspective
 
 #### Rest APIs are consist of resources and CRUD operations on this resources
 Try to be proactive, if there are some struggling points how you can design Rest Api for specific case, just think how it can be translated to crud operation, and how consumer can easily understand the design
 
 ### Use nouns instead of verbs in endpoint paths
 
-
-
 Incorrect variant:\
-GET /getUserById/15
+```GET /getUserById/15```
 
-if we think as endpoint is resource identifier and method is crud operation on this resource we be confused:\
-Get the resource which identifier is /getUserById/15
+This endpoint is wrong if we take into consideration that, *in Rest APIs endpoints(paths) are resource identifiers*, so */getUserById/15* as identifier does not make any sense
 
-Correct variant\
+Correct variant:
+```
 GET /users/15
+```
 
 If now make sense, GET the resource which identifier is /users/15
 
@@ -64,15 +65,15 @@ If now make sense, GET the resource which identifier is /users/15
 
 We should name our collections as plural
 
-/users      <- we can think this as we are getting list of users
-/users/1    <- we can think this as we are getting user number one from list of users(previous collection resource)
+```GET /users```      <- we can think this as we are getting list of users\
+```GET /users/1```    <- we can think this as we are getting user number one from list of users(previous collection resource)
 
 If we use singular names, it will be confusing
 
-/user  <- it may be misunderstood as we are getting single user
-/user/1  <- it may be misunderstood as we are getting user's sub resource named 1
+```GET /user```  <- it may be misunderstood as we are getting single user
+```GET /user/1```  <- it may be misunderstood as we are getting user's sub resource named 1
 
-Examples:\
+Examples:
 ```
 GET /users    
 GET /users/1
@@ -81,13 +82,13 @@ GET /users/1/orders
 
 ### Map Correct HTTP Methods to REST Operations
 
-| Method | Usage                 | Example
-|--------|-----------------------|-------------------
-| GET    | Get Resource          | ```GET /users``` ```GET /users/1```  ```GET /users/1/star```
-| POST   | Create Resource       | ```POST /users``` ```POST /users/1/star```
-| PUT    | REPLACE/Full Update   | ```PUT /users/15  {full body}```
-| PATCH  | Partial Update        | ```PATCH /users/15 {partial body}```
-| DELETE | Delete Resource       | ```PATCH /users/15```
+| Method        | Usage                 | Example
+|---------------|-----------------------|-------------------
+| **GET**       | Get Resource          | ```GET /users``` ```GET /users/1```  ```GET /users/1/star```
+| **POST**      | Create Resource       | ```POST /users``` ```POST /users/1/star```
+| **PUT**       | REPLACE/Full Update   | ```PUT /users/15  {full body}```
+| **PATCH**     | Partial Update        | ```PATCH /users/15 {partial body}```
+| **DELETE**    | Delete Resource       | ```PATCH /users/15```
 
 
 ### Nesting resources for hierarchical objects
@@ -96,7 +97,7 @@ Nested/Sub resources are good choice to handle relations
 
 ```
 GET /users/1/orders     <- nested resource
-GET /orders?userId=1    <- main resource by filtering
+GET /orders?userId=1    <- not nested resource, filtered by userId
 ```
 
 When to use nested resource?
@@ -116,7 +117,7 @@ POST /users/15/activate
 POST /users/15/deactivate
 ```
 
-What instead we can do?\
+What instead we can do?
 #### Solutions 1: Converting actions to sub-resources
 We can think as our user resource has a sub resource named activated (adverb form of active) and if we create this sub resource we say that we activate user, if we remove this sub resource we say that we deactivate user
 ```
@@ -215,12 +216,82 @@ Filtering can be handled by two approach:
    This approach is good to choice if you are few and dedicated filtering options, like you can only filter by age or by name
 
 #### Sorting:
-
-```/users?sort=+age,-name```
+```
+/users?sort=+age,-name
+```
 
 #### Pagination:
+```
+/users?page=1&pageSize=10
+```
 
-```/users?page=1&pageSize=10```
+### Aggregation in Rest Api
+It is a little hard to create better API for resource aggregation, but we have some solutions for that:
+
+Let's say we have users resource collection (```GET /api/1.0/users```).\
+How we can get resource count and average age by country?
+#### Solution 1: create specialized sub resource
+In this solution we just create new sub resource directly from collection resource without item resources, 
+and separate aggregate sub resource from resource itself by aggregate keyword
+Formula:
+```
+    /api/1.0/{resource-name}/aggregated/{aggregate-name}
+```
+Example:
+```
+GET /api/1.0/users/aggregated/by-country
+Response:
+[
+  {
+    "country": "Azerbaijan",
+    "averageAge": 24
+    "count": 563
+  },
+  {
+    "country": "Italy",
+    "averageAge": 26
+    "count": 2638
+  }
+]
+```
+
+#### Solution 2: create new resource
+In this solution instead of creating new resource we will create a separate resource:
+
+Formula:
+```
+GET /api/1.0/{aggregated-resource}
+```
+
+Example: 
+```
+GET /api/1.0/users-by-country
+Response:
+[
+  {
+    "country": "Azerbaijan",
+    "averageAge": 24
+    "count": 563
+  },
+  {
+    "country": "Italy",
+    "averageAge": 26
+    "count": 2638
+  }
+]
+```
+
+Second solution is simpler from first one and more precise to Rest Api Architecture,
+but the single problem here is that, in this approach you lose relation between original resource and aggregated resource
+
+#### Filtering Before and After Aggregation
+
+Get aggregated list of user countries for Africa continental and show results which has average age 24
+```
+GET /api/1.0/users/by-continental/{id:id_for_africa_continental}/aggregated/by-country/by-average-age/24
+```
+
+#### How we can create Rest Api for aggregation of some resources
 
 ### Bulk Operations in Rest API
 Sometimes it is required to do bulk operation do increase performance
@@ -242,7 +313,7 @@ Example for a version:
 ```
 /api/1.0/users
 ```
-if we go production with version 1 and we need to do some breaking changed to version 1 (which is affecting rest api design) we need to introduce new version
+if we go production with version 1, and we need to do some breaking changed to version 1 (which is affecting rest api design) we need to introduce new version
 ```
 /api/1.1/users
 ```
