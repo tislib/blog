@@ -9,15 +9,11 @@ resources:
   src: "featured-image.png"
 page:
     theme: "wide"
-
 tags: ["rest-api", "best-practices"]
 categories: ["posts", "rest-api"]
-
 summary: "Rest Api General Best Practices, and their reasons why you should go with that way"
-
 toc:
   auto: false
-  
 ---
 
 ### Don't write as Restful, Think as Restful
