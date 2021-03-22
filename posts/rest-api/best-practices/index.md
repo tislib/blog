@@ -16,18 +16,38 @@ toc:
   auto: false
 ---
 
+### Concept
+
+#### Base things in Rest Api
+**Rest Api** is stands for *Representational State Transfer*. \
+In Rest Api we have 2 basic terminology:
+1. **Resource** - an object which has state
+2. **Method**   - an operation which has identifies which kind of state transfer will happen
+3. **State**    - state is current representation of resource, it means that our resource can have different data in different time, and it is state of resource 
+
+We have Server and Clients, we can transfer state of resource from server to client or vice versa.
+
+#### What does state transfer mean?
+Let's say we want to **create new user**. *How we can understand this basic operation from state transfer perspective?*
+Creating new user means that, our client has new state (new user), and our client needs to transfer its new state about user resource to server.\  
+So, we can say that creating new user is transfer new user state to server\
+We also can say that updating existing user is transferring new state of existing resource to server\
+
+After we transfer state of resource to server or vice versa, both party should have same state if an external factor does not cause any change
+
+It means that if we updated a resource, and we called GET method to get same resource, we should see same data as we sent request to update it 
+
 ### Don't write as Restful, Think as Restful
 
-* API's abstraction should be different from its implementation, if you want to write better API don't try to represent
-  your backend logic as is, instead think how API may be better to use by its clients, always think as How API consumer will use it
-* Try to be proactive, don't try to translate legacy API's OR SOAP style simply to REST API, try to be proactive,
-  think that how this API should be easy to use, how can I make it like a CRUD
-* Everything is CRUD, Any resource can be Created, Read, Updated, Deleted, Anything else can be represented as Resource
+#### Restful service should be abstract, not representation of backend service layer as is.
+You need to think on restful service separately, don't try to implement Rest Api's just like converting service layer codes to APIs, instead think from API consumer perspective
+
+#### Rest APIs are consist of resources and CRUD operations on this resources
+Try to be proactive, if there are some struggling points how you can design Rest Api for specific case, just think how it can be translated to crud operation, and how consumer can easily understand the design
 
 ### Use nouns instead of verbs in endpoint paths
 
-As we know REST is representational state transfer, we are transferring current state of resource from client to server OR wise versa.\
-In Rest API endpoint is the resource identifier.
+
 
 Incorrect variant:\
 GET /getUserById/15
@@ -42,7 +62,7 @@ If now make sense, GET the resource which identifier is /users/15
 
 ### Name collections with plural nouns
 
-We should name our collections as plural, mainly for consistency
+We should name our collections as plural
 
 /users      <- we can think this as we are getting list of users
 /users/1    <- we can think this as we are getting user number one from list of users(previous collection resource)
@@ -81,10 +101,8 @@ GET /orders?userId=1    <- main resource by filtering
 
 When to use nested resource?
 
-1. If nested resource can be created/updated/queried only if you have information about parent, like you cannot do
-   anything in orders without knowing which user is it related
-2. If you want to do operation on resource without knowing or having its parent, in that case nested resources are not
-   correct choice
+1. If nested resource can be created/updated/queried only if you have information about its parent
+2. Sub resource is logically related to its parent
 
 ### Convert Actions to *Resources* or *Fields*
 
