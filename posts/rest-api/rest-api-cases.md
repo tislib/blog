@@ -38,5 +38,8 @@ Translate actions to resources, e.g. do follow = POST following, unfollow = DELE
 
 ### Case 2
 **Problem:**
+You have task list, you can activate, deactivate, disable, enable this tasks, how to do it
+
+Solution: 
 
 We need to 

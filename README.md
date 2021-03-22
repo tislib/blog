@@ -1,9 +1,3 @@
-Blog by Taleh Ibrahimli
-================
-________________
+Personal Blog by Taleh Ibrahimli
 
-# Table of contents
-
-* Research 
-    * Rest Api
-        * [General Guidelines](posts/rest-api/general-guidelines.md) 
+[https://tislib.blog](https://tislib.blog)
