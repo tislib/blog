@@ -10,8 +10,6 @@ summary: "Rest Api General Best Practices, and their reasons why you should go w
 ---
 ### Don't write as Restful, Think as Restful
 
-How to think as Restful?
-
 * API's abstraction should be different from its implementation, if you want to write better API don't try to represent
    your backend logic as is, instead think how API may be better to use by its clients, always think as How API consumer will use it
 * Try to be proactive, don't try to translate legacy API's OR SOAP style to simply to REST API, try to be proactive,
