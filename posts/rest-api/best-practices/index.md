@@ -1,21 +1,31 @@
 ---
 title: "Rest API Best Practices"
 date: 2021-03-21T00:00:00
-lastmod: 2021-03-21T00:00:00 
-slug: rest-api-best-practices 
-draft: false
+lastmod: 2021-03-21T00:00:00
+slug: rest-api-best-practices
+description: "Discover what the Hugo - uBlog theme is all about and the core-concepts behind it."
+resources:
+- name: "featured-image"
+  src: "featured-image.png"
+page:
+    theme: "wide"
+
 tags: ["rest-api", "best-practices"]
 categories: ["posts", "rest-api"]
-theme: "wide"
-featuredImage: /posts/rest-api/assets/best-practices-cover.webp
+
 summary: "Rest Api General Best Practices, and their reasons why you should go with that way"
+
+toc:
+  auto: false
+  
 ---
+
 ### Don't write as Restful, Think as Restful
 
 * API's abstraction should be different from its implementation, if you want to write better API don't try to represent
-   your backend logic as is, instead think how API may be better to use by its clients, always think as How API consumer will use it
+  your backend logic as is, instead think how API may be better to use by its clients, always think as How API consumer will use it
 * Try to be proactive, don't try to translate legacy API's OR SOAP style simply to REST API, try to be proactive,
-   think that how this API should be easy to use, how can I make it like a CRUD
+  think that how this API should be easy to use, how can I make it like a CRUD
 * Everything is CRUD, Any resource can be Created, Read, Updated, Deleted, Anything else can be represented as Resource
 
 ### Use nouns instead of verbs in endpoint paths
@@ -59,9 +69,9 @@ GET /users/1/orders
 |--------|-----------------------|-------------------
 | GET    | Get Resource          | ```GET /users``` ```GET /users/1```  ```GET /users/1/star```
 | POST   | Create Resource       | ```POST /users``` ```POST /users/1/star```
-| PUT    | REPLACE/Full Update   | ```PUT /users/15  {full body}``` 
-| PATCH  | Partial Update        | ```PATCH /users/15 {partial body}``` 
-| DELETE | Delete Resource       | ```PATCH /users/15``` 
+| PUT    | REPLACE/Full Update   | ```PUT /users/15  {full body}```
+| PATCH  | Partial Update        | ```PATCH /users/15 {partial body}```
+| DELETE | Delete Resource       | ```PATCH /users/15```
 
 
 ### Nesting resources for hierarchical objects
@@ -129,16 +139,16 @@ In ideal world 5** error should not be happened, if we are returning 5** status 
 
 Let's go to detailed status codes (*most used error codes by REST APIs*)
 
-| Status Code | Message | Rest Api Usage 
+| Status Code | Message | Rest Api Usage
 |-----|--------------------|-------------------
-| 2** |                    |                   
+| 2** |                    |
 | 200 | OK                 | Updating Resource with PUT OR PATCH method
 | 201 | CREATED            | Creating Resource with POST Method
 | 204 | NO_CONTENT         | Resource deleted, as we not returning any data in DELETE, it is better to indicate that there are no content |
 | 4** |                    |
 | 400 | BAD_REQUEST        | POST/PUT/PATCH, why creating/updating request, request input validation failed, client sent data which is wrong from servers perspective
 | 401 | UNAUTHENTICATED    | User is not authenticated and this resource needs user identification (you need to login or send access token, etc.)
-| 403 | FORBIDDEN          | User is identified but don't have access to this resource or cannot call this method in this access because of insufficient permission 
+| 403 | FORBIDDEN          | User is identified but don't have access to this resource or cannot call this method in this access because of insufficient permission
 | 404 | NOT_FOUND          | Resource not found, we should return 404 if the resource we are operating on not found
 | 405 | METHOD_NOT_ALLOWED | Resource not found, we should return 404 if the resource we are operating on not found
 | 5** |                    |
@@ -186,7 +196,7 @@ But it is better to handle filtering, sorting and pagination for resources, and 
 
 Filtering can be handled by two approach:
 1. **Filter by query parameters: ```/users?age=13```** \
-   Using filtering by query parameters is the best way, you may use filtering by query parameters if you can support *multipple and multichoice filtering* options like users can be searched by age, name, or both  
+   Using filtering by query parameters is the best way, you may use filtering by query parameters if you can support *multipple and multichoice filtering* options like users can be searched by age, name, or both
 2. **Filter by path parameters: ```/users/by-age/13```** \
    This approach is good to choice if you are few and dedicated filtering options, like you can only filter by age or by name
 
@@ -227,7 +237,7 @@ if we go production with version 1 and we need to do some breaking changed to ve
 #### What is hateoas?
 Hateoas stands for Hypermedia as the Engine of Application State
 
-Example: 
+Example:
 ```
 GET /api/1.0/users/1
 
@@ -247,3 +257,4 @@ GET /api/1.0/users/1
 ```
 
 Hateoas is very useful to build self descriptive REST APIs. 
+
