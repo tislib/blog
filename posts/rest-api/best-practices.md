@@ -87,7 +87,7 @@ What instead we can do?\
 *Solutions 1: Converting actions to sub-resources*\
 We can think as our user resource has a sub resource named activated (adverb form of active) and if we create this sub resource we say that we activate user, if we remove this sub resource we say that we deactivate user
 ```
-GET /users/15/activated    <- this will return 200 if user is activated, 404 if user not activated
+GET /users/15/activated    <- 200 -> activated, 404 -> dectivated
 POST /users/15/activated   <- this will activate user
 DELETE /users/15/activated <- this will deactivate user
 ```
