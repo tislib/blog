@@ -23,10 +23,10 @@ toc:
 
 Basic things in Rest Api design
 1. **Resource** - an object which has identifier
-2. **Method**   - an operation which has identifies which kind of state transfer will happen
+2. **Method**   - an operation which indicates that what kind of state transfer will happen
 3. **State**    - state is current representation of resource, it means that our resource can have different data in different time, and it is state of resource 
 
-In Rest Apis resources are *identifed by their urls*, so it means that *1 unique url = 1 unique resource*
+In Rest Apis resources are *identified by their urls*, so it means that *1 unique url = 1 unique resource*
 
 We have Server and Clients, we can transfer state of resource from server to client or vice versa.
 

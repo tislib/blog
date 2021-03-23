@@ -51,6 +51,5 @@ hugo = false
 
 [params.analytics]
 enable = true
-
-    [params.analytics.yandex]
-    id = "74420695"
+[params.analytics.yandex]
+id = "74420695"
