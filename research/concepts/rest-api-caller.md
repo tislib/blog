@@ -8,6 +8,10 @@ tags: ["research", "concept"]
 # Purpose
 Preparing set of configuration which can be used to generalize rest api clients by configuration
 
-Example:
-
-
+Example:\
+Call
+```
+{
+    ""
+}
+```
