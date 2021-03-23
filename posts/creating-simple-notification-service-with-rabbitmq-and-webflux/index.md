@@ -6,7 +6,7 @@ slug: creating-simple-notification-service-with-rabbitmq-and-webflux
 description: "Simple Notification service where users can be notified by group"
 resources:
 - name: "featured-image"
-  src: "featured-image.png"
+  src: "featured-image.jpeg"
 page:
     theme: "wide"
 tags: ["asynchronous-programming", "messaging", "rabbit-mq", "spring-webflux", "spring-boot"]
@@ -16,6 +16,7 @@ toc:
   auto: false
 ---
 
+**Repository:** [link](https://github.com/tislib/blog-examples/tree/master/rabbitmq-webflux-simple-group-based-messaging)
 ## Concept
 
 Simple Notification service where users can be notified by group
