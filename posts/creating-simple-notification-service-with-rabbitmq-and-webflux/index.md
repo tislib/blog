@@ -14,6 +14,7 @@ categories: ["posts", "asynchronous-programming"]
 summary: "Simple Notification service where users can be notified by group"
 toc:
   auto: false
+
 ---
 
 **
@@ -21,13 +22,14 @@ Repository:** [link](https://github.com/tislib/blog-examples/tree/master/rabbitm
 
 ## Concept
 
-Simple Notification service where users can be notified by group, this is useful for complex message routing.\
-We are trying to build scalable system which can be easily replicated
+In this post we will create notification service. Which can be used to send notifications from server to client (e.g.
+from backend to frontend)
 
 ## Use Cases
 
 1. Group Chat, messages to groups should be sent to all users on that group
 2. Event System, subscribe to some events and get notified
+3. User RabbitMq Message Broker
 
 ## Specification
 
@@ -35,16 +37,10 @@ We are trying to build scalable system which can be easily replicated
 
 1. Send notification to user
 2. Subscribe to specific user notifications as topic (each subscription will get a copy)
+3. User RabbitMq Message Broker and **queue per user** approach
 
 ### Advanced Notifications: group to user
 
-1. Create/Update/Delete users
-2. Create/Update/Delete groups
-3. Assign user to group(s)
-4. Subscribe to User messages
-5. Send a message to group, and it will be delivered to all member users by their subscription
-6. When user - group assignment is changed, subscription should adopt itself automatically
-7. In Replication mode, if user/group added/modified in one replica, another replicas should reconfigure subscriptions
-   immediately
-8. Support for both **Server Sent Events** and **Long Polling** techniques
-9. API for getting all messages for particular user with delivered, read properties
+1. Send notification to group (and all group members will be notified)
+2. Subscribe to specific user notifications as topic (each subscription will get a copy)
+3. User RabbitMq Message Broker and **queue per group** approach
