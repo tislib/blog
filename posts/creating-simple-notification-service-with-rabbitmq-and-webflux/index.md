@@ -152,10 +152,10 @@ public void close() throws Exception {
 ### Architecture
 
 *Application General Flow:*
-![Example image](/posts/creating-simple-notification-service-with-rabbitmq-and-webflux/simple-notification-architecture.svg)
+![Example image](/posts/creating-simple-notification-service-with-rabbitmq-and-webflux/simple-notification-architecture.svg.png)
 
 *RabbitMq Flow:*
-![Example image](/posts/creating-simple-notification-service-with-rabbitmq-and-webflux/simple-notification-rabbitmq-architecture.svg)
+![Example image](/posts/creating-simple-notification-service-with-rabbitmq-and-webflux/simple-notification-rabbitmq-architecture.svg.png)
 
 All Messages send to exchange(left side).\
 All User subscriptions(listening to new messages) are bound to separate queue.\
@@ -331,13 +331,13 @@ public Flux<String> receive(long userId, Duration timeout, Integer maxMessageCou
 ### Architecture
 
 *Application General Flow:*
-![General Flow](/posts/creating-simple-notification-service-with-rabbitmq-and-webflux/advanced-notification-architecture.svg)
+![General Flow](/posts/creating-simple-notification-service-with-rabbitmq-and-webflux/advanced-notification-architecture.svg.png)
 
 *RabbitMq Flow:*
-![RabbitMq Flow](/posts/creating-simple-notification-service-with-rabbitmq-and-webflux/advanced-notification-rabbitmq-architecture.svg)
+![RabbitMq Flow](/posts/creating-simple-notification-service-with-rabbitmq-and-webflux/advanced-notification-rabbitmq-architecture.svg.png)
 
 *Subscription Flow:*
-![Subscription Flow](/posts/creating-simple-notification-service-with-rabbitmq-and-webflux/advanced-subscription-flow.svg)
+![Subscription Flow](/posts/creating-simple-notification-service-with-rabbitmq-and-webflux/advanced-subscription-flow.svg.png)
 
 1. All Messages send to exchange per group(left side).
 2. Each application is subscribed all groups (in that case user count will not affect queue count, only group count will affect it)
